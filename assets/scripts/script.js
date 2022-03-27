@@ -48,6 +48,7 @@ newProjectForm.addEventListener("submit",(e)=>{
         if (input.type==="submit") return;
         input.value = "";
     })
+    reloadSubs();
 })
 
 document.querySelectorAll(".close-mod").forEach(el => el.addEventListener("click",(e)=>{
@@ -71,7 +72,20 @@ function loadAllSubs(project,el){
     project.done?title.classList.add("done"):null;
     el.append(title);
     const form = document.createElement("div");
-    console.log(el)
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    console.log(deleteBtn)
+    deleteBtn.addEventListener("click",e=>{
+        e.stopPropagation();
+        let path = e.target.parentNode.dataset.path;
+        !path.includes(",")?path=[path]:path = path.split(",")
+        path = path.map((num)=>{
+            return parseInt(num)
+        });
+        deleteTask(path);
+
+    })
+    el.append(deleteBtn)
     if (el.dataset.path){
         let nameId;
         let dateId;
@@ -125,6 +139,15 @@ function findById(parent,id){
     return parent.subTasks[index]
 }
 
+function findIndexById(parent,id){
+    const subs = parent.subTasks;
+    let index;
+    for (let i = 0;i<subs.length;i++){
+        if (subs[i].id == id) index = i;
+    }
+    return index;
+}
+
 function findByPath(parent,path){
     if (path.length === 0) return;
     if (path.length===1){
@@ -135,6 +158,21 @@ function findByPath(parent,path){
     }
     let id = path.shift();
     return findByPath(findById(parent,id),path)
+}
+
+function findParentAndIndexByPath(parent,path){
+    if (path.length === 0) return;
+    if (path.length===1){
+        console.log("DONE DRILLING")
+        let id = path[0];
+        const obj = {
+            parent:parent,
+            index:findIndexById(parent,id)
+        }
+        return obj;
+    }
+    let id = path.shift();
+    return findParentAndIndexByPath(findById(parent,id),path)
 }
 
 document.addEventListener("click",e=>{
@@ -151,4 +189,12 @@ function reloadSubs(){
     const cont = document.querySelector("#projects-cont");
     cont.innerHTML =""
     loadAllSubs(projects,cont)
+}
+
+function deleteTask(path){
+    const {parent,index} = findParentAndIndexByPath(projects,path);
+    console.log(parent.subTasks)
+    parent.subTasks.splice(index,1)
+    localStorage.setItem("projectsxxx",JSON.stringify(projects));
+    reloadSubs();
 }
