@@ -1,5 +1,15 @@
+ul{
+    margin:0;
+}
+
+h3{
+    margin: 0;
+}
+
 li{
     list-style: none;
+    border:3px solid black;
+    padding:5px;
 }
 
 .hide{
@@ -25,9 +35,14 @@ li{
 }
 
 .subtask-input{
+    padding:20px 0;
     display: none;
+    opacity: 0;
+    transition: all 3s linear;
 }
 
 li:hover>.subtask-input{
-    display: initial;
+    display: block;
+    opacity: 1;
+    padding:20px 0;
 }
