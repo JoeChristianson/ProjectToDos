@@ -1,0 +1,12 @@
+.hide{
+    display: none;
+}
+
+.form-error{
+    color: red;
+}
+
+.done{
+    text-decoration: line-through;
+    color: rgb(145, 145, 145);
+}

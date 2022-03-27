@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="./assets/styles/reset.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <script src="./assets/scripts/script.js" defer></script>
+</head>
+<body>
+    <nav>
+        <button id="open-new-project-mod">+ New Project</button>
+    </nav>
+    <main>
+        <section class="hide" id="new-project-mod">
+            <button class="close-mod">x</button>
+            <form id="new-project-form" action="">
+                <label for="new-project-name">Project Name:</label>
+                <input id="new-project-name" name="new-project-name" type="text">
+                <div class="form-error" id="new-project-name-error"></div>
+                <label for="new-project-due-date">Due Date:</label>
+                <input type="date" id="new-project-due-date">
+                <div class="form-error" id="new-project-due-date-error"></div>
+                <input type="submit">
+            </form>
+        </section>
+        <section class="" id="projects-mod">
+            <h3>All Projects</h3>
+            <div class="projects-cont" id="projects-cont">
+                
+            </div>
+        </section>
+    </main>
+</body>
+</html>
