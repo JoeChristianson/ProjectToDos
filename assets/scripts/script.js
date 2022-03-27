@@ -7,6 +7,7 @@ const newProjectDueDate = document.querySelector("#new-project-due-date");
 const newProjectDueDateError = document.querySelector("#new-project-due-date-error");
 const openNewProjectModBtn = document.querySelector("#open-new-project-mod");
 const navBar = document.querySelector("nav");
+const hideDone = true;
 
 class Task{
     constructor(superTask,name,dueDate){
@@ -64,6 +65,8 @@ document.querySelectorAll(".close-mod").forEach(el => el.addEventListener("click
 }));
 
 function loadAllSubs(project,el){
+    el.dataset.isDone = project.done;
+    (project.done)?el.classList.add("hide"):null;
     path = el?.dataset?.path;
     const title = document.createElement("h3");
     title.textContent = project.name;
@@ -73,8 +76,8 @@ function loadAllSubs(project,el){
     el.append(title);
     const form = document.createElement("div");
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    console.log(deleteBtn)
+    deleteBtn.textContent = "❌";
+    deleteBtn.classList.add("delete-btn")
     deleteBtn.addEventListener("click",e=>{
         e.stopPropagation();
         let path = e.target.parentNode.dataset.path;
@@ -85,7 +88,7 @@ function loadAllSubs(project,el){
         deleteTask(path);
 
     })
-    el.append(deleteBtn)
+    title.append(deleteBtn)
     if (el.dataset.path){
         let nameId;
         let dateId;
