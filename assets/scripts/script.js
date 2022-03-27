@@ -97,7 +97,7 @@ function loadAllSubs(project,el){
             nameId = "name"+ el.dataset.path.replace(",","-_-")
             dateId = "date" + el.dataset.path.replace(",","-_-")
         }
-    
+        form.classList.add("subtask-input")
         form.innerHTML = `<input id=${nameId} type="text"/><input id=${dateId} type="date"/>`
         const addSubBtn =document.createElement("button");
         addSubBtn.textContent="Add Subtask"

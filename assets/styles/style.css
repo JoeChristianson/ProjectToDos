@@ -10,3 +10,11 @@
     text-decoration: line-through;
     color: rgb(145, 145, 145);
 }
+
+.subtask-input{
+    display: none;
+}
+
+li:hover>.subtask-input{
+    display: initial;
+}
